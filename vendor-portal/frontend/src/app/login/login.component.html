@@ -1,0 +1,48 @@
+<div class="login-wrapper">
+  <div class="overlay"></div>
+  <div class="login-card">
+    <h2>
+      <img src="https://cdn-icons-png.flaticon.com/512/906/906175.png" alt="Vendor" height="38" style="vertical-align:middle;margin-right:8px;">
+      Vendor Portal
+    </h2>
+    <p class="subtitle">Login to continue</p>
+    <div class="error" *ngIf="apiError" style="font-size: 15px;">{{ apiError }}</div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="username"><span class="icon">👤</span> Username</label>
+        <input type="text" id="username" formControlName="username" placeholder="Enter username"
+          [class.invalid]="username?.invalid && (username?.dirty || username?.touched)" required />
+        <div class="error" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+          <div *ngIf="username?.errors?.['required']">Username is required.</div>
+          <div *ngIf="username?.errors?.['minlength']">Minimum 3 characters.</div>
+        </div>
+      </div>
+     <div class="form-group">
+  <label for="password"><span class="icon">🔒</span> Password</label>
+  <div class="password-input-wrapper">
+    <input [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password" placeholder="Enter password"
+      [class.invalid]="password?.invalid && (password?.dirty || password?.touched)" required />
+    <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword" tabindex="-1" aria-label="Toggle password visibility">
+      <!-- Eye Open SVG -->
+      <svg *ngIf="hidePassword" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#7ad2fb" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/>
+      </svg>
+      <!-- Eye Slash SVG -->
+      <svg *ngIf="!hidePassword" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#7ad2fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <line x1="4" y1="4" x2="20" y2="20" />
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/>
+      </svg>
+    </button>
+  </div>
+  <div class="error" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+    <div *ngIf="password?.errors?.['required']">Password is required.</div>
+    <div *ngIf="password?.errors?.['minlength']">Minimum 6 characters.</div>
+  </div>
+</div>
+      <button type="submit" [disabled]="loginForm.invalid">Sign In</button>
+    </form>
+  </div>
+</div>
