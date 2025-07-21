@@ -1,28 +1,24 @@
-// src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    DashboardComponent
+    LoginComponent
+    // No dashboard components here
   ],
   imports: [
     BrowserModule,
-    RouterModule,
-    AppRoutingModule,
-    FormsModule,
+    AppRoutingModule,      // Only top-level routes, dashboard is lazy
     HttpClientModule,
-    ReactiveFormsModule 
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

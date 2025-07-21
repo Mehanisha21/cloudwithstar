@@ -1,0 +1,117 @@
+.sidebar-contrasty {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 76px;
+  background: rgba(28,38,80,0.98);
+  box-shadow: 2px 0 20px 0 rgba(18,22,50,0.17);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 120;
+  transition: width 0.24s cubic-bezier(.52,.02,.56,1.03);
+}
+.sidebar-contrasty.open {
+  width: 240px;
+  min-width: 220px;
+  align-items: flex-start;
+}
+.profile-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 38px;
+  margin-bottom: 46px;
+}
+.profile-circle {
+  background: linear-gradient(120deg, #304ffe 64%, #5ab4ff 120%);
+  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  box-shadow: 0 4px 20px 0 rgba(28,90,155,0.18);
+  cursor: pointer;
+  border: 4px solid #f3f6fd;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.14s;
+}
+.profile-circle:hover {
+  border: 4px solid #29d6f6;
+}
+.profile-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  user-select: none;
+  pointer-events: none;
+}
+.user-name {
+  color: #fff;
+  font-size: 1.22rem;
+  font-weight: 500;
+  margin-top: 8px;
+  letter-spacing: 0.02em;
+}
+.profile-link {
+  color: #84e6ff;
+  margin-top: 4px;
+  text-decoration: none;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: color .17s;
+}
+.profile-link .material-icons {
+  font-size: 19px;
+}
+.profile-link:hover {
+  color: #ffe082;
+}
+.nav-links {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 24px;
+}
+.nav-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 14px 0 14px 22px;
+  color: #dbeafe;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+  gap: 15px;
+  transition: background .13s, color .13s, border-color .14s;
+}
+.nav-btn .material-icons {
+  font-size: 25px;
+  color: #6cf3fd;
+  margin-right: 2px;
+}
+.nav-btn.active,
+.nav-btn:hover {
+  background: linear-gradient(90deg, #101730 55%, #184c81 95%);
+  color: #fff;
+  border-left: 4px solid #29d6f6;
+}
+.sidebar-contrasty:not(.open) .nav-btn span:not(.material-icons) {
+  display: none;
+}
+.sidebar-contrasty:not(.open) .nav-btn {
+  justify-content: center;
+  padding-left: 0;
+}
