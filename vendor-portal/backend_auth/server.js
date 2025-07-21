@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 const PORT = process.env.PORT;
@@ -27,6 +28,9 @@ app.use('/api', invoiceRoutes);
 app.use('/api/payage', payageRoutes);
 app.use('/api', memoRoutes);
 
+
+app.use(express.json());
+app.use(cors({ origin: 'http://localhost:4200' })); // Allow Angular dev server
 
 // ✅ Start server
 app.listen(PORT, () => {

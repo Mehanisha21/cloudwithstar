@@ -15,7 +15,7 @@
           [class.invalid]="username?.invalid && (username?.dirty || username?.touched)" required />
         <div class="error" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
           <div *ngIf="username?.errors?.['required']">Username is required.</div>
-          <div *ngIf="username?.errors?.['minlength']">Minimum 3 characters.</div>
+          <div *ngIf="username?.errors?.['minlength']">Minimum 10 characters.</div>
         </div>
       </div>
      <div class="form-group">
