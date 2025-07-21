@@ -1,10 +1,10 @@
+// routes/memo.js
 const express = require('express');
 const router = express.Router();
 
-// Import the controller
-const memoController = require('../controllers/cdmemoController');
+const cdmemoController = require('../controllers/cdmemoController');
 
-// Route to get credit/debit memos by Vendor ID (LIFNR)
-router.get('/memos/:lifnr', memoController.getCreditDebitMemos);
+// Route: GET /api/memo/:lifnr
+router.get('/:lifnr', cdmemoController.getCDMemoByVendor);
 
 module.exports = router;

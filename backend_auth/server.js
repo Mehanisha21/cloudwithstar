@@ -17,7 +17,6 @@ const invoiceRoutes = require('./routes/invoice');
 const payageRoutes = require('./routes/payage');
 const memoRoutes = require('./routes/memo');
 
-
 app.use('/api', loginRoutes);
 app.use('/api', profileRoutes);
 app.use('/api', rfqRoutes);
@@ -25,8 +24,7 @@ app.use('/api', poRoutes);
 app.use('/api', goodsReceiptRoutes); 
 app.use('/api', invoiceRoutes);
 app.use('/api/payage', payageRoutes);
-app.use('/api', memoRoutes);
-
+app.use('/api/memo', memoRoutes);
 
 // ✅ Start server
 app.listen(PORT, () => {
