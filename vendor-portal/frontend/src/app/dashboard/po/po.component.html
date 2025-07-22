@@ -1,1 +1,36 @@
-<p>po works!</p>
+<div class="po-container" *ngIf="purchaseOrders?.length > 0; else noData">
+  <h2>Purchase Orders</h2>
+  <div class="table-responsive">
+    <table class="po-table">
+      <thead>
+        <tr>
+          <th>PO Number</th>
+          <th>Vendor</th>
+          <th>Document Date</th>
+          <th>Delivery Date</th>
+          <th>Total Amount</th>
+          <th>Currency</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let po of purchaseOrders">
+          <td>{{ po.PurchaseOrder }}</td>
+          <td>{{ po.Vendor }}</td>
+          <td>{{ po.DocumentDate | date:'mediumDate' }}</td>
+          <td>{{ po.DeliveryDate | date:'mediumDate' }}</td>
+          <td>{{ po.TotalAmount | number:'1.2-2' }}</td>
+          <td>{{ po.Currency }}</td>
+          <td>{{ po.Status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="no-data-msg">
+    <p *ngIf="errorMsg">{{ errorMsg }}</p>
+    <p *ngIf="!errorMsg">No Purchase Orders available.</p>
+  </div>
+</ng-template>

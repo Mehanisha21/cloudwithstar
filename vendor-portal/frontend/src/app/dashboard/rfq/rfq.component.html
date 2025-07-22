@@ -1,1 +1,38 @@
-<p>rfq works!</p>
+<div class="rfq-page-container">
+  <h2 class="rfq-title">Requests for Quotation (RFQ)</h2>
+  <div class="rfq-table-responsive">
+    <table class="rfq-table">
+      <thead>
+        <tr>
+          <th>RFQ ID</th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Due Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rfq of rfqs">
+          <td>{{ rfq.id }}</td>
+          <td>{{ rfq.item }}</td>
+          <td>{{ rfq.qty }}</td>
+          <td>{{ rfq.due }}</td>
+          <td>
+            <span [ngClass]="{
+              'open-status': rfq.status === 'Open',
+              'submitted-status': rfq.status === 'Submitted',
+              'awarded-status': rfq.status === 'Awarded',
+              'closed-status': rfq.status === 'Closed'
+            }">
+              {{ rfq.status }}
+            </span>
+          </td>
+          <td>
+            <button class="rfq-action-btn" [disabled]="rfq.status !== 'Open'">Submit Quote</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+.po-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--main-content);
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(25,60,90,0.1);
+}
+
+.po-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.po-table th, .po-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 15px;
+}
+
+.po-table th {
+  background-color: var(--nav-bg);
+  color: var(--button-text);
+  font-weight: 600;
+}
+
+.po-table tbody tr:hover {
+  background-color: #f1f8ff;
+}
+
+.no-data-msg {
+  text-align: center;
+  margin: 50px 0;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 500;
+}

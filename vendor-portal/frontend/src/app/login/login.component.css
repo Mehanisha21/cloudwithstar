@@ -22,21 +22,14 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   min-height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1500&q=80') center center / cover no-repeat;
+  justify-content: flex-end;
+  background: url('/assets/login_back.png') center center / cover no-repeat;
   top: 0;
   left: 0;
+ 
 }
 
-.login-wrapper .overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 19, 33, 0.78);
-  z-index: 1;
-  top: 0;
-  left: 0;
-}
+
 
 .login-card {
   z-index: 2;
@@ -53,19 +46,36 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 150px;
+}
+
+.login-wrapper .overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 19, 33, 0.111);
+  z-index: 1;
+  top: 0;
+  left: 0;
 }
 
 .login-card h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 30px;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  font-size: 32px;
+  margin-bottom: 12px;
+  letter-spacing: 1.2px;
+  font-weight: 700; /* Bold */
+  background: linear-gradient(90deg, #01214f, #0104a9); /* Unique gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase; /* Optional: all caps */
 }
 
+
 .login-card .subtitle {
-  color: #d1ecf1;
+  color: #040809;
   margin-bottom: 28px;
   font-size: 16px;
 }
@@ -84,7 +94,7 @@ form {
 .form-group label {
   display: block;
   font-size: 14px;
-  color: #d9e3ea;
+  color: #46494c;
   margin-bottom: 7px;
   font-weight: 500;
 }
@@ -115,7 +125,7 @@ form {
 }
 
 .form-group input::placeholder {
-  color: #b0b8c1;
+  color: #ffffff;
   font-size: 15px;
 }
 
@@ -189,5 +199,3 @@ button[type='submit']:disabled {
     width: 96vw;
   }
 }
-
-

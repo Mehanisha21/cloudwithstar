@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Light mode colors */
+  --background: #f4f8fb;
+  --main-content: #fff;
+  --sidebar: #263238;
+  --text-color-nav: white;
+  --text-color: #263238;
+  --nav-bg: #263238;
+  --accent: #2176ff;
+  --button-bg: #228ef4;
+  --button-text: #fff;
+  --main-bg-gradient: linear-gradient(120deg, #f5f7fa  50%, #c7c9cc  100%);
+}
+
+/* Dark mode overrides */
+body.dark-theme {
+  --background: #15192b;
+  --main-content: #23263d;
+  --sidebar: #0f1021;
+  --text-color-nav: white;
+  --text-color: #e3eafc;
+  --nav-bg: #0f1021;
+  --accent: #46d3e8;
+  --button-bg: #222c51;
+  --button-text: #ffe082;
+ --main-bg-gradient: linear-gradient(120deg, #343146 60%, #23202f 100%);
+
+}
+
+/* Base styles using variables */
+
+body, html {
+  background-color: var(--background);
+  color: var(--text-color);
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
