@@ -67,7 +67,8 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   margin-bottom: 12px;
   letter-spacing: 1.2px;
   font-weight: 700; /* Bold */
-  background: linear-gradient(90deg, #01214f, #0104a9); /* Unique gradient */
+  background: linear-gradient(90deg, #01214f, #0104a9);
+  background-clip: text;              
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase; /* Optional: all caps */
