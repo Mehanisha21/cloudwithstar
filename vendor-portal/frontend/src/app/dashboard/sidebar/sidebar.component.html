@@ -1,0 +1,24 @@
+<aside [class.open]="sidebarOpen" class="sidebar-contrasty">
+  <div class="profile-area">
+    <div class="profile-circle"
+         (click)="toggleSidebar()"
+         [title]="sidebarOpen ? 'Collapse Menu' : 'Expand Menu'">
+      <img [src]="profilePic" alt="Profile" />
+    </div>
+    <div *ngIf="sidebarOpen" class="user-name">{{ userName }}</div>
+    <a *ngIf="sidebarOpen" class="profile-link" routerLink="/dashboard/profile">
+      <span class="material-icons">manage_accounts</span>
+      View Profile
+    </a>
+  </div>
+  <nav class="nav-links">
+    <a *ngFor="let link of navLinks"
+       [routerLink]="link.route"
+       routerLinkActive="active"
+       [title]="link.label"
+       class="nav-btn">
+      <span class="material-icons">{{ link.icon }}</span>
+      <span *ngIf="sidebarOpen">{{ link.label }}</span>
+    </a>
+  </nav>
+</aside>

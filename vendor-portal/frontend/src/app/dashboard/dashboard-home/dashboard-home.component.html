@@ -1,0 +1,48 @@
+<div class="dash-home-container">
+  <div class="summary-cards">
+    <div class="summary-card" *ngFor="let card of summaryCards" [ngStyle]="{'background': card.color}">
+      <span class="material-icons summary-icon">{{ card.icon }}</span>
+      <div class="summary-value">{{ card.value }}</div>
+      <div class="summary-label">{{ card.label }}</div>
+    </div>
+  </div>
+
+  <section class="feature-section">
+    <div class="section-title">
+      <span class="material-icons section-icon">description</span>
+      Open Requests for Quotation (RFQ)
+    </div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>RFQ ID</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Due Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rfq of rfqs">
+            <td>{{ rfq.id }}</td>
+            <td>{{ rfq.item }}</td>
+            <td>{{ rfq.qty }}</td>
+            <td>{{ rfq.due }}</td>
+            <td>
+              <span [ngClass]="{
+                  'open-status': rfq.status === 'Open',
+                  'submitted-status': rfq.status === 'Submitted',
+                  'awarded-status': rfq.status === 'Awarded',
+                  'closed-status': rfq.status === 'Closed'
+                }">
+                {{ rfq.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <a class="section-link" routerLink="/dashboard/rfq">View all RFQs</a>
+  </section>
+</div>
