@@ -15,7 +15,7 @@
           [class.invalid]="username?.invalid && (username?.dirty || username?.touched)" required />
         <div class="error" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
           <div *ngIf="username?.errors?.['required']">Username is required.</div>
-          <div *ngIf="username?.errors?.['minlength']">Minimum 3 characters.</div>
+          <div *ngIf="username?.errors?.['minlength']">Minimum 10 characters.</div>
         </div>
       </div>
      <div class="form-group">
@@ -39,7 +39,7 @@
   </div>
   <div class="error" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
     <div *ngIf="password?.errors?.['required']">Password is required.</div>
-    <div *ngIf="password?.errors?.['minlength']">Minimum 6 characters.</div>
+    <div *ngIf="password?.errors?.['minlength']">Minimum 3 characters.</div>
   </div>
 </div>
       <button type="submit" [disabled]="loginForm.invalid">Sign In</button>

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 
 export class LoginComponent {
@@ -16,11 +17,12 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router 
+    private router: Router,
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(7)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required, Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
@@ -28,35 +30,23 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.apiError = null;
       this.loading = true;
-
-      // Simulated backend call; replace with real AuthService and remove setTimeout
-      setTimeout(() => {
-        this.loading = false;
-
-        // **Fake login logic for illustration**
-        if (
-          this.loginForm.value.username === 'vendor123' &&
-          this.loginForm.value.password === 'password123'
-        ) {
-          this.router.navigate(['/dashboard']);
-        } else {
-          this.apiError = 'Invalid username or password.';
-        }
-      }, 1200);
-
-      // Real implementation:
-      /*
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (result) => {
-          // handle successful login
-        },
-        error: (err) => {
-          // show user-friendly error message
-          this.apiError = err?.error?.message || 'Login failed. Please try again.';
-        },
-        complete: () => this.loading = false
-      });
-      */
+      this.authService
+        .login(this.loginForm.value.username, this.loginForm.value.password)
+        .subscribe({
+          next: (res) => {
+            this.loading = false;
+            if (res.success) {
+              // Store vendor info, JWT, etc. if needed
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.apiError = res.message || 'Login failed.';
+            }
+          },
+          error: (err) => {
+            this.loading = false;
+            this.apiError = err?.error?.message || 'Invalid Username or Password.';
+          },
+        });
     } else {
       this.loginForm.markAllAsTouched();
     }
