@@ -6,7 +6,13 @@ const app = express();
 const PORT = process.env.PORT;
 
 // ✅ Middleware
-app.use(express.json());
+app.use((req, res, next) => {
+  if (req.method !== 'GET') {
+    express.json()(req, res, next);
+  } else {
+    next();
+  }
+});
 
 // ✅ Routes
 const loginRoutes = require('./routes/login');
@@ -30,7 +36,6 @@ app.use('/api/payage', payageRoutes);
 app.use('/api/memo', memoRoutes);
 
 
-app.use(express.json());
 app.use(cors({ origin: 'http://localhost:4200' })); // Allow Angular dev server
 
 // ✅ Start server

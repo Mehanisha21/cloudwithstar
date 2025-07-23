@@ -2,28 +2,50 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface PurchaseOrder {
-  // Define fields according to your SAP response shape
-  // Example of typical PO fields; adjust based on SAP data structure!
-  PurchaseOrder: string;
-  Vendor: string;
-  DocumentDate: string;
-  DeliveryDate: string;
-  TotalAmount: number;
-  Currency: string;
-  Status: string;
-}
+// export interface PurchaseOrder {
+//   Ebeln: string;
+//   Lifnr: string;
+//   Bedat: string;
+//   Ebelp: string;
+//   Matnr: string;
+//   Txz01: string;
+//   Ktmng: number;
+//   Meins: string;
+//   Netpr: number;
+//   Peinh: number;
+//   Netwr: number;
+//   Brtwr: number;
+//   Waers: string;
+//   Statu: string;
+//   Bstyp: string;
+//   Bsart: string;
+// }
+
+// //interface ApiResponse {
+//   //success: boolean;
+//   message?: string;
+//   data: PurchaseOrder[];
+// }
 
 @Injectable({
   providedIn: 'root'
 })
 export class PoService {
-  private apiUrl = 'http://localhost:5000/api/po';  // Adjust as needed for your backend
+  // *** CRITICAL CHANGE: Updated to use Node.js port 5000 ***
+  // This URL combines your Node.js server address (localhost:5000)
+  // with the base path '/api' defined in your server.js.
+  // You MUST ensure that the actual route defined in your 'routes/po.js'
+  // (e.g., router.get('/purchase-orders', ...)) matches the final path here.
+  // For example, if po.js has router.get('/purchase-orders', ...), then this should be:
+  private apiUrl = 'http://localhost:5000/api/po'; // <--- ADJUST THIS FINAL PATH IF NEEDED
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getPOByVendor(lifnr: string): Observable<PurchaseOrder[]> {
-    // Calls your Node backend API: GET /api/po/:Lifnr
-    return this.http.get<PurchaseOrder[]>(`${this.apiUrl}/${lifnr}`);
+  getPOByVendor(vendorId: string) {
+    // If your Node.js API expects vendorId as a query parameter:
+    // return this.http.get<ApiResponse>(`${this.apiUrl}?vendorId=${vendorId}`);
+    // Otherwise:
+    return this.http.get(`${this.apiUrl}/${vendorId}`);
+    // return this.http.get(this.apiUrl);
   }
 }

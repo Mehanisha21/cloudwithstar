@@ -1,36 +1,58 @@
-<div class="po-container" *ngIf="purchaseOrders?.length > 0; else noData">
+<div class="po-container">
   <h2>Purchase Orders</h2>
+
+  <div *ngIf="isLoading" class="loading-message">
+    Loading Purchase Orders...
+  </div>
+
   <div class="table-responsive">
-    <table class="po-table">
+    <table *ngIf="!isLoading && !errorMsg && purchaseOrders.length > 0" class="table">
       <thead>
         <tr>
           <th>PO Number</th>
           <th>Vendor</th>
           <th>Document Date</th>
-          <th>Delivery Date</th>
+          <th>PO Item Number</th>
+          <th>Material</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Unit</th>
+          <th>Net Price</th>
+          <th>Per Unit</th>
           <th>Total Amount</th>
+          <th>Gross Value</th>
           <th>Currency</th>
           <th>Status</th>
+          <th>PO Category</th>
+          <th>PO Type</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let po of purchaseOrders">
-          <td>{{ po.PurchaseOrder }}</td>
-          <td>{{ po.Vendor }}</td>
-          <td>{{ po.DocumentDate | date:'mediumDate' }}</td>
-          <td>{{ po.DeliveryDate | date:'mediumDate' }}</td>
-          <td>{{ po.TotalAmount | number:'1.2-2' }}</td>
-          <td>{{ po.Currency }}</td>
-          <td>{{ po.Status }}</td>
+          <td>{{ po.Ebeln || '—' }}</td>
+          <td>{{ po.Lifnr || '—' }}</td>
+          <td>{{ formatODataDate(po.Bedat) }}</td>
+          <td>{{ po.Ebelp || '—' }}</td>
+          <td>{{ po.Matnr || '—' }}</td>
+          <td>{{ po.Txz01 || '—' }}</td>
+          <td>{{ po.Ktmng || '—' }}</td>
+          <td>{{ po.Meins || '—' }}</td>
+          <td>{{ po.Netpr || '—' }}</td>
+          <td>{{ po.Peinh || '—' }}</td>
+          <td>{{ po.Netwr || '—' }}</td>
+          <td>{{ po.Brtwr || '—' }}</td>
+          <td>{{ po.Waers || '—' }}</td>
+          <td>{{ po.Statu || '—' }}</td>
+          <td>{{ po.Bstyp || '—' }}</td>
+          <td>{{ po.Bsart || '—' }}</td>
         </tr>
       </tbody>
     </table>
-  </div>
-</div>
 
-<ng-template #noData>
-  <div class="no-data-msg">
-    <p *ngIf="errorMsg">{{ errorMsg }}</p>
-    <p *ngIf="!errorMsg">No Purchase Orders available.</p>
-  </div>
-</ng-template>
+    <!-- No data message -->
+    <div *ngIf="noDataFound && !isLoading">No Purchase Order data found.</div>
+
+    <!-- Error message -->
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+  </div>
+</div>
