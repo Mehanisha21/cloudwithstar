@@ -1,0 +1,38 @@
+<div class="goods-receipt-container" *ngIf="goodsReceipts.length > 0; else noData">
+  <h2>Goods Receipts</h2>
+  <div class="table-responsive">
+    <table class="goods-receipt-table">
+      <thead>
+        <tr>
+          <th>Document No</th>
+          <th>Year</th>
+          <th>Date</th>
+          <th>Vendor</th>
+          <th>Material</th>
+          <th>Description</th>
+          <th>Plant</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gr of goodsReceipts">
+          <td>{{ gr.Mblnr }}</td>
+          <td>{{ gr.Mjahr }}</td>
+          <td>{{ gr.Budat | date:'mediumDate' }}</td>
+          <td>{{ gr.Vendor }}</td>
+          <td>{{ gr.Material }}</td>
+          <td>{{ gr.Description }}</td>
+          <td>{{ gr.Plant }}</td>
+          <td>{{ gr.Quantity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="no-data-msg">
+    <p *ngIf="errorMsg">{{ errorMsg }}</p>
+    <p *ngIf="!errorMsg">No Goods Receipts available.</p>
+  </div>
+</ng-template>

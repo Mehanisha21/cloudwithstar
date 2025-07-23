@@ -1,0 +1,40 @@
+.goods-receipt-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--main-content, #fff);
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(25,60,90,0.1);
+}
+
+.goods-receipt-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  margin-bottom: 8px;
+}
+
+.goods-receipt-table th, .goods-receipt-table td {
+  padding: 11px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+.goods-receipt-table th {
+  background: var(--nav-bg, #225);
+  color: var(--button-text, #fff);
+  font-weight: 600;
+}
+
+.goods-receipt-table tbody tr:hover {
+  background-color: #eef2fd;
+}
+
+.no-data-msg {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--text-color, #2a3255);
+  font-size: 18px;
+  font-weight: 500;
+}

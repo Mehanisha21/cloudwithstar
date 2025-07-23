@@ -8,7 +8,6 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-
 export class LoginComponent {
   loginForm: FormGroup;
   hidePassword = true;
@@ -21,8 +20,8 @@ export class LoginComponent {
     private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -30,23 +29,24 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.apiError = null;
       this.loading = true;
-      this.authService
-        .login(this.loginForm.value.username, this.loginForm.value.password)
-        .subscribe({
-          next: (res) => {
-            this.loading = false;
-            if (res.success) {
-              // Store vendor info, JWT, etc. if needed
-              this.router.navigate(['/dashboard']);
-            } else {
-              this.apiError = res.message || 'Login failed.';
-            }
-          },
-          error: (err) => {
-            this.loading = false;
-            this.apiError = err?.error?.message || 'Invalid Username or Password.';
-          },
-        });
+
+      const username = this.loginForm.value.username;
+      const password = this.loginForm.value.password;
+
+      this.authService.login(username, password).subscribe({
+        next: (res) => {
+          this.loading = false;
+          if (res.success) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.apiError = res.message || 'Login failed.';
+          }
+        },
+        error: (err) => {
+          this.loading = false;
+          this.apiError = err?.error?.message || 'Invalid username or password.';
+        }
+      });
     } else {
       this.loginForm.markAllAsTouched();
     }
@@ -59,6 +59,7 @@ export class LoginComponent {
   get username() {
     return this.loginForm.get('username');
   }
+  
   get password() {
     return this.loginForm.get('password');
   }

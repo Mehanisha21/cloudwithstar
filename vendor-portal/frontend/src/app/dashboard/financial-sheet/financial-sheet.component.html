@@ -1,0 +1,91 @@
+<div class="financial-sheet-container">
+
+  <!-- Tabs -->
+  <nav class="tabs-nav">
+    <button (click)="setActiveTab('invoices')" [class.active]="activeTab==='invoices'">Invoice Details</button>
+    <button (click)="setActiveTab('payments')" [class.active]="activeTab==='payments'">Payments and Aging</button>
+    <button (click)="setActiveTab('memos')" [class.active]="activeTab==='memos'">Credit / Debit Memos</button>
+  </nav>
+
+  <!-- Invoice Details -->
+  <section *ngIf="activeTab === 'invoices'" class="tab-content">
+    <h3>Invoice Details</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Invoice Number</th>
+          <th>Billing Date</th>
+          <th>Due Date</th>
+          <th>Material Description</th>
+          <th>Amount</th>
+          <th>Currency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoice of invoices">
+          <td>{{ invoice.InvoiceNumber }}</td>
+          <td>{{ invoice.BillingDate | date: 'mediumDate' }}</td>
+          <td>{{ invoice.dueDate | date: 'mediumDate' }}</td>
+          <td>{{ invoice.MaterialDescription }}</td>
+          <td>{{ invoice.Amount | number:'1.2-2' }}</td>
+          <td>{{ invoice.Currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Payments and Aging -->
+  <section *ngIf="activeTab === 'payments'" class="tab-content">
+    <h3>Payments and Aging</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Payment ID</th>
+          <th>Billing Date</th>
+          <th>Due Date</th>
+          <th>Amount</th>
+          <th>Currency</th>
+          <th>Aging (Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.paymentId }}</td>
+          <td>{{ payment.BillingDate | date: 'mediumDate' }}</td>
+          <td>{{ payment.DueDate | date: 'mediumDate' }}</td>
+          <td>{{ payment.Amount | number:'1.2-2' }}</td>
+          <td>{{ payment.Currency }}</td>
+          <td [ngClass]="{'aging-overdue': payment.Aging > 0}">
+            {{ payment.Aging }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Credit/Debit Memos -->
+  <section *ngIf="activeTab === 'memos'" class="tab-content">
+    <h3>Credit & Debit Memos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Memo ID</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Currency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let memo of memos">
+          <td>{{ memo.MemoId }}</td>
+          <td>{{ memo.Type }}</td>
+          <td>{{ memo.Description }}</td>
+          <td>{{ memo.Amount | number:'1.2-2' }}</td>
+          <td>{{ memo.Currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>

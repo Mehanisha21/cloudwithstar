@@ -1,27 +1,25 @@
-<div class="po-container" *ngIf="purchaseOrders?.length > 0; else noData">
+<div class="po-container" *ngIf="purchaseOrders.length > 0; else noData">
   <h2>Purchase Orders</h2>
   <div class="table-responsive">
     <table class="po-table">
       <thead>
         <tr>
           <th>PO Number</th>
+          <th>Material</th>
+          <th>Description</th>
           <th>Vendor</th>
           <th>Document Date</th>
-          <th>Delivery Date</th>
-          <th>Total Amount</th>
-          <th>Currency</th>
-          <th>Status</th>
+          <th>Total<span *ngIf="purchaseOrders.length > 0">({{ purchaseOrders[0].Waers }})</span></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let po of purchaseOrders">
-          <td>{{ po.PurchaseOrder }}</td>
-          <td>{{ po.Vendor }}</td>
-          <td>{{ po.DocumentDate | date:'mediumDate' }}</td>
-          <td>{{ po.DeliveryDate | date:'mediumDate' }}</td>
-          <td>{{ po.TotalAmount | number:'1.2-2' }}</td>
-          <td>{{ po.Currency }}</td>
-          <td>{{ po.Status }}</td>
+          <td>{{ po.Ebeln }}</td>
+          <td>{{ po.Matnr }}</td>
+          <td>{{ po.Txz01 }}</td>
+          <td>{{ po.Lifnr }}</td>
+          <td>{{ parseSapDate(po.Bedat) }}</td>
+          <td>{{ po.Netwr }}</td>
         </tr>
       </tbody>
     </table>

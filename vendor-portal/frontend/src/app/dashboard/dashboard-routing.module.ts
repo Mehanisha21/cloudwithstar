@@ -4,16 +4,21 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { RFQComponent } from './rfq/rfq.component';
 import { POComponent } from './po/po.component';
+import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { FinancialSheetComponent } from './financial-sheet/financial-sheet.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
     children: [
-      { path: '', component: DashboardHomeComponent }, // This loads at /dashboard
-      { path: 'rfq', component: RFQComponent },    // /dashboard/rfq
-      { path: 'po', component: POComponent },      // /dashboard/po
-      // ...other dashboard features
+      { path: '', component: DashboardHomeComponent },
+      { path: 'rfq', component: RFQComponent },   
+      { path: 'po', component: POComponent }, 
+      {path: 'goods-receipt', component: GoodsReceiptComponent },  
+      {path: 'finance-sheet', component: FinancialSheetComponent },  
+      {path: 'profile', component: ProfileComponent },
     ]
   }
 ];

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  @Input() profilePic: string = 'assets/vendor_profile.png';
+  @Input() profilePic: string = 'assets/vendor_profile.jpg';
   @Input() userName: string = 'Vendor Name';
   @Input() sidebarOpen: boolean = false;
   @Output() sidebarChanged = new EventEmitter<boolean>();
@@ -18,7 +18,7 @@ export class SidebarComponent {
     { label: 'RFQs', icon: 'description', route: '/dashboard/rfq' },
     { label: 'Purchase Orders', icon: 'assignment', route: '/dashboard/po' },
     { label: 'Goods Receipt', icon: 'local_shipping', route: '/dashboard/goods-receipt' },
-    { label: 'Financial Sheet', icon: 'receipt_long', route: '/dashboard/finance' },
+    { label: 'Financial Sheet', icon: 'receipt_long', route: '/dashboard/finance-sheet' },
     { label: 'Logout', icon: 'logout', route: '/login' }
   ];
 

@@ -1,10 +1,3 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: 'Segoe UI', 'Roboto', sans-serif;
-  overflow: hidden;
-  background: #12192c;
-}
 
 input[type="password"]::-ms-reveal,
 input[type="password"]::-webkit-reveal,

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -7,8 +9,27 @@ import { Component } from '@angular/core';
 })
 export class DashboardLayoutComponent {
   sidebarOpen = false;
+  vendorName: string = 'Vendor';
 
-  // Listen for sidebar toggle event
+  constructor(
+    private authService: AuthService,
+    private profileService: ProfileService
+  ) {}
+
+  ngOnInit() {
+    const username = this.authService.getUsername();
+    if (username) {
+      this.profileService.getVendorProfile(username).subscribe({
+        next: (res) => {
+          if (res.success && res.data && res.data.Name1) {
+            this.vendorName = res.data.Name1;
+          }
+        }
+      });
+    }
+  }
+
+ 
   onSidebarToggle(open: boolean) {
     this.sidebarOpen = open;
   }

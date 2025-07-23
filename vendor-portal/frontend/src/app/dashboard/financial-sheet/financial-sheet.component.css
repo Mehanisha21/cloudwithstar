@@ -1,0 +1,51 @@
+.financial-sheet-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px;
+  background: var(--main-content);
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1);
+}
+
+.tabs-nav {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.tabs-nav button {
+  padding: 12px 24px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: #f0f0f0;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.tabs-nav button.active {
+  background: var(--accent);
+  color: white;
+}
+
+.tab-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tab-content th, .tab-content td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.tab-content th {
+  background: var(--nav-bg);
+  color: var(--button-text);
+  font-weight: 700;
+}
+
+.aging-overdue {
+  color: red;
+  font-weight: 700;
+}
