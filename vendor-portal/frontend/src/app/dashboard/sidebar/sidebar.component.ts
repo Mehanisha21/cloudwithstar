@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router'; // Assuming you use Router for navigation/logout
 
 @Component({
   selector: 'app-sidebar',
@@ -23,25 +23,33 @@ export class SidebarComponent {
   ];
 
    toggleSidebar() {
+    { label: 'Dashboard', route: '/dashboard', icon: 'dashboard' },
+    { label: 'Purchase Orders', route: '/dashboard/po', icon: 'assignment' },
+    { label: 'RFQs', route: '/dashboard/rfq', icon: 'receipt_long' },
+    { label: 'Invoices', route: '/dashboard/invoices', icon: 'description' },
+    { label: 'Shipments', route: '/dashboard/shipments', icon: 'local_shipping' },
+    { label: 'Profile', route: '/dashboard/profile', icon: 'person' },
+    { label: 'Settings', route: '/dashboard/settings', icon: 'settings' },
+    { label: 'Logout', route: '/logout', icon: 'logout' } // Example logout route
+  ];
+
+  constructor(private router: Router) { } // Inject Router
+
+  ngOnInit(): void {
+    // Initialization logic if needed
+  }
+
+  toggleSidebar(): void {
     this.sidebarOpen = !this.sidebarOpen;
-    this.sidebarChanged.emit(this.sidebarOpen); // notify the parent!
+    this.sidebarChanged.emit(this.sidebarOpen); // Emit the new boolean state
   }
 
-  constructor(private router: Router) {}
-
-  handleLogoutClick(event: MouseEvent, link: { label: string; icon: string; route: string }) {
-  if (link.label === 'Logout') {
-    event.preventDefault();
-    event.stopPropagation();  // add this too
-
-    const confirmed = confirm('Are you sure you want to logout?');
-    if (confirmed) {
-      // Clear auth tokens or perform logout logic here
-      this.router.navigate([link.route]);
-    } 
+  handleLogoutClick(event: Event, link: any): void {
+    if (link.label === 'Logout') {
+      event.preventDefault(); // Prevent default routerLink navigation
+      // Implement your logout logic here
+      console.log('Logout initiated');
+      this.router.navigate(['/login']); // Redirect to login page after logout
+    }
   }
-}
-
-
-  
 }

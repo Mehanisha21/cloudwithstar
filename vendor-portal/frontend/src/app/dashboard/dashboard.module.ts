@@ -1,3 +1,5 @@
+// src/app/dashboard/dashboard.module.ts
+
 import { NgModule } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CommonModule } from '@angular/common';
@@ -31,9 +33,10 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DashboardLayoutComponent,
+    // Declare all components that belong to this dashboard module
+    RFQComponent,
+    POComponent,
     SidebarComponent,
-    DashboardHomeComponent,
     TopNavComponent,
     RFQComponent,
     POComponent,

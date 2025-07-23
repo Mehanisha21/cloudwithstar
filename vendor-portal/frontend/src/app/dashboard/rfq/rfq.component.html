@@ -1,6 +1,21 @@
 <div class="rfq-page-container">
   <h2 class="rfq-title">Requests for Quotation (RFQ)</h2>
-  <div class="rfq-table-responsive">
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-message">
+    <p>Loading RFQs...</p>
+    <!-- You can add a spinner icon here if you have one (e.g., <i class="fas fa-spinner fa-spin"></i>) -->
+  </div>
+
+  <!-- Error Message Display -->
+  <div *ngIf="errorMsg" class="error-message alert alert-danger">
+    <p>{{ errorMsg }}</p>
+    <!-- Optionally add a retry button -->
+    <button class="retry-btn" (click)="getRfqs()">Retry</button>
+  </div>
+
+  <!-- RFQ Table - Visible only when not loading, no errors, and data exists -->
+  <div class="rfq-table-responsive" *ngIf="!isLoading && !errorMsg && rfqs.length > 0">
     <table class="rfq-table">
       <thead>
         <tr>
@@ -13,12 +28,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let rfq of rfqs">
+        <!-- Loop through the rfqs array to display each RFQ -->
+        <!-- trackBy: trackByRfqId now correctly references the function in the component -->
+        <tr *ngFor="let rfq of rfqs; trackBy: trackByRfqId">
           <td>{{ rfq.id }}</td>
           <td>{{ rfq.item }}</td>
           <td>{{ rfq.qty }}</td>
           <td>{{ rfq.due }}</td>
           <td>
+            <!-- Apply CSS classes dynamically based on rfq.status -->
             <span [ngClass]="{
               'open-status': rfq.status === 'Open',
               'submitted-status': rfq.status === 'Submitted',
@@ -29,10 +47,17 @@
             </span>
           </td>
           <td>
+            <!-- Action button enabled only if RFQ status is 'Open' -->
             <button class="rfq-action-btn" [disabled]="rfq.status !== 'Open'">Submit Quote</button>
+            <!-- Add (click)="submitQuote(rfq.id)" later to handle the action -->
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- No Data Found Message - Visible when not loading, no errors, and no RFQs are found -->
+  <div *ngIf="!isLoading && !errorMsg && rfqs.length === 0" class="no-data-message">
+    <p>No RFQs found for this vendor at the moment.</p>
   </div>
 </div>

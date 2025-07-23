@@ -1,7 +1,12 @@
-<div class="po-container" *ngIf="purchaseOrders.length > 0; else noData">
+<div class="po-container" *ngIf="purchaseOrders?.length > 0; else noData">
   <h2>Purchase Orders</h2>
+
+  <div *ngIf="isLoading" class="loading-message">
+    Loading Purchase Orders...
+  </div>
+
   <div class="table-responsive">
-    <table class="po-table">
+    <table *ngIf="!isLoading && !errorMsg && purchaseOrders.length > 0" class="table">
       <thead>
         <tr>
           <th>PO Number</th>
@@ -9,26 +14,29 @@
           <th>Description</th>
           <th>Vendor</th>
           <th>Document Date</th>
-          <th>Total<span *ngIf="purchaseOrders.length > 0">({{ purchaseOrders[0].Waers }})</span></th>
+          <th>Delivery Date</th>
+          <th>Total Amount</th>
+          <th>Currency</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let po of purchaseOrders">
-          <td>{{ po.Ebeln }}</td>
-          <td>{{ po.Matnr }}</td>
-          <td>{{ po.Txz01 }}</td>
-          <td>{{ po.Lifnr }}</td>
-          <td>{{ parseSapDate(po.Bedat) }}</td>
-          <td>{{ po.Netwr }}</td>
+          <td>{{ po.PurchaseOrder }}</td>
+          <td>{{ po.Vendor }}</td>
+          <td>{{ po.DocumentDate | date:'mediumDate' }}</td>
+          <td>{{ po.DeliveryDate | date:'mediumDate' }}</td>
+          <td>{{ po.TotalAmount | number:'1.2-2' }}</td>
+          <td>{{ po.Currency }}</td>
+          <td>{{ po.Status }}</td>
         </tr>
       </tbody>
     </table>
-  </div>
-</div>
 
-<ng-template #noData>
-  <div class="no-data-msg">
-    <p *ngIf="errorMsg">{{ errorMsg }}</p>
-    <p *ngIf="!errorMsg">No Purchase Orders available.</p>
-  </div>
-</ng-template>
+    <!-- No data message -->
+    <div *ngIf="noDataFound && !isLoading">No Purchase Order data found.</div>
+
+    <!-- Error message -->
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+  </div>
+</div>

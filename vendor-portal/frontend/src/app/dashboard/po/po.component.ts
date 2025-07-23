@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PoService, PurchaseOrder } from '../../services/po.service';
+import { PoService } from '../../services/po.service';
 
 @Component({
   selector: 'app-po',
@@ -7,36 +7,56 @@ import { PoService, PurchaseOrder } from '../../services/po.service';
   styleUrls: ['./po.component.css']
 })
 export class POComponent implements OnInit {
-  purchaseOrders: PurchaseOrder[] = [];
-  errorMsg = '';
+
+  isLoading: boolean = false;
+  errorMsg: string | null = null;
+  noDataFound: boolean = false;
+  purchaseOrders: any[] = [];
+
+  private readonly vendorId: string = '0000100000';
 
   constructor(private poService: PoService) {}
 
   ngOnInit(): void {
-    const lifnr = '100000';
-    this.poService.getPOByVendor(lifnr).subscribe({
-      next: (res) => {
-        if (res.success) {
-          this.purchaseOrders = res.data;
+    this.getPurchaseOrders();
+  }
+
+  getPurchaseOrders(): void {
+    this.isLoading = true;
+    this.errorMsg = null;
+    this.noDataFound = false;
+
+    this.poService.getPOByVendor(this.vendorId).subscribe({
+      next: (response: any) => {
+        console.log('API Response received in component:', response);
+
+        // ✅ Adjusted to actual backend structure
+        if (response?.data?.length) {
+          this.purchaseOrders = response.data;
+          console.log("Parsed Purchase Orders:", this.purchaseOrders);
         } else {
-          this.errorMsg = 'Failed to load Purchase Orders.';
+          this.noDataFound = true;
         }
+
+        this.isLoading = false;
       },
-      error: (err) => {
-        this.errorMsg = 'Failed to load Purchase Orders.';
-        console.error('PO loading error:', err);
+      error: (err: any) => {
+        this.errorMsg = 'Failed to load Purchase Order data. Please check your network or try again later.';
+        console.error('Error fetching Purchase Order data:', err);
+        this.isLoading = false;
+        this.purchaseOrders = [];
+      },
+      complete: () => {
+        console.log('Purchase Order data fetching process completed.');
       }
     });
   }
 
-  // SAP date to JS date
-  parseSapDate(sapDateString: string): string {
-    if (!sapDateString) return '';
-    const match = /\/Date\((\d+)\)\//.exec(sapDateString);
-    if (match) {
-      const date = new Date(+match[1]);
-      return date.toLocaleDateString();
-    }
-    return sapDateString;
-  }
+  // ✅ Converts OData date format like "/Date(1748822400000)/" to readable format
+  formatODataDate(odataDate: string | undefined): string {
+    if (!odataDate) return '—';
+    const timestamp = parseInt(odataDate.replace('/Date(', '').replace(')/', ''), 10);
+    const date = new Date(timestamp);
+    return date.toLocaleDateString();
+  }
 }
